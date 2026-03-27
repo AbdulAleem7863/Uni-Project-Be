@@ -4,8 +4,15 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import morgan from "morgan";
 import router from "./routes/index.js";
+import connectDB from "./config/db.js";
 
 const app = express();
+
+// --- Ensure DB is connected for Vercel Serverless ---
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 
 // --- Security & Parsing Middleware ---
 app.use(helmet());
