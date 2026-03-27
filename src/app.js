@@ -27,11 +27,17 @@ if (process.env.NODE_ENV !== "production") {
 // --- API Routes ---
 app.use("/api/v1", router);
 
+
+app.get("/", (req, res) => {
+  res.send("University Project Backend is running");
+
+});
+
 // --- Health Check ---
+
 app.get("/health", (req, res) => {
   res.status(200).json({ success: true, message: "Server is healthy" });
 });
-
 // --- 404 Handler ---
 app.use((req, res) => {
   res.status(404).json({
